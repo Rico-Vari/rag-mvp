@@ -4,14 +4,15 @@ Minimal Streamlit app to chat over your PDFs using a Chroma vector DB and LangCh
 
 Inspired by the LangGraph + FastAPI starter: [agent-service-toolkit](https://github.com/JoshuaC215/agent-service-toolkit).
 
+We can modify RAG behaviour later on. 
+
 ### Setup
 
-1) Create a virtual environment and install dependencies (uv):
+1) Create a virtual environment and install dependencies:
 
 ```bash
-uv venv
 source .venv/bin/activate
-uv pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 2) Configure environment:
