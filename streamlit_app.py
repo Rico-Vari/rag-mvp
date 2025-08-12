@@ -12,7 +12,7 @@ from rag.rag_agent import generate_answer, stream_answer, retrieve_sources
 
 load_dotenv()
 
-st.set_page_config(page_title="RAG (Chroma) – Streamlit", page_icon="📄", layout="wide")
+st.set_page_config(page_title="KSA Legal RAG (Chroma)", page_icon="⚖️", layout="wide")
 
 
 def ensure_index_exists() -> bool:
@@ -36,17 +36,14 @@ def sidebar():
                 build_index()
             st.success("Index built.")
 
-        st.divider()
-        st.info(
-            "This sample is inspired by the LangGraph-based template in agent-service-toolkit."
-        )
+        # Removed blue info box per request
 
 
 def main():
     sidebar()
 
-    st.title("📄 RAG over PDFs (Chroma)")
-    st.caption("Drop PDFs in the knowledge base and chat with them.")
+    st.title("⚖️ Saudi Arabia Legal Assistant")
+    st.caption("General information only. Answers are based on your uploaded KSA legal PDFs.")
 
     if not ensure_index_exists():
         st.warning(
