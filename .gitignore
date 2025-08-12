@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+*.pyo
+*.pyd
+.Python
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Tools and caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+
+# Editors/OS
+.vscode/
+.idea/
+.DS_Store
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Streamlit
+.streamlit/
+
+# Chroma DB
+rag/chroma_db/
+
+# Node (if any)
+node_modules/
+
+# Misc
+.cache/
+.cursor/
+
+# RAG
+*.pdf

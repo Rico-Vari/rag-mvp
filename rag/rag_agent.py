@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Iterable, List, Tuple
 
 from dotenv import load_dotenv
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import Runnable
@@ -55,8 +55,9 @@ def build_rag_chain() -> Runnable:
     def format_docs(docs):
         return "\n\n".join(f"Source: {d.metadata.get('source','')}\n{d.page_content}" for d in docs)
 
+    # Important: feed only the question string into the retriever, not the whole dict
     chain: Runnable = {
-        "context": retriever | format_docs,
+        "context": (lambda x: x["question"]) | retriever | format_docs,
         "question": lambda x: x["question"],
     } | prompt | llm
 

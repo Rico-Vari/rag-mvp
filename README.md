@@ -4,12 +4,15 @@ Minimal Streamlit app to chat over your PDFs using a Chroma vector DB and LangCh
 
 Inspired by the LangGraph + FastAPI starter in the excellent template: [agent-service-toolkit](https://github.com/JoshuaC215/agent-service-toolkit).
 
+This is a minimal example. 
+We can change the embedding types, chunks, etc.
+
 ### Setup
 
-1. Install dependencies (using uv):
+1. Install dependencies to your prefered virtual environmente:
 
    ```bash
-   uv pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
 
 2. Configure environment:
