@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Iterable, List, Tuple
+from typing import Iterable, List
 
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -40,11 +40,21 @@ def build_rag_chain() -> Runnable:
         [
             (
                 "system",
-                "You are a helpful assistant.",
+                (
+                    "You are a cautious, helpful legal assistant specialized in the laws and regulations of the Kingdom of Saudi Arabia (KSA). "
+                    "You provide general information only and not legal advice.\n\n"
+                    "Guidelines:\n"
+                    "- Base answers strictly on the provided context passages from KSA legal sources.\n"
+                    "- If the answer is not clearly supported by the context, say you don't know and suggest consulting a qualified Saudi lawyer or relevant authority.\n"
+                    "- Prefer citing specific law names, articles, or regulations mentioned in the context.\n"
+                    "- Include short citations like [Source: filename] when possible.\n"
+                    "- Do not draft enforceable legal documents. Avoid definitive statements like 'this is legally required' unless explicitly stated in the context.\n"
+                    "- Clarify that laws can change and interpretations vary; verification of current applicability is recommended."
+                ),
             ),
             (
                 "system",
-                "Use the provided context to answer the user's question.\n"
+                "Use the following context to answer the user's question.\n"
                 "If the answer is not in the context, say you don't know.\n\n"
                 "Context:\n{context}",
             ),
@@ -79,6 +89,7 @@ def stream_answer(question: str) -> Iterable[str]:
 
 def retrieve_sources(question: str) -> List[str]:
     retriever = get_retriever()
-    docs = retriever.get_relevant_documents(question)
+    # Use retriever.invoke per LangChain deprecation guidance
+    docs = retriever.invoke(question)
     return [str(Path(d.metadata.get("source", "")).name) for d in docs]
 
